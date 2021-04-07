@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const MongoClient = require('mongodb').MongoClient;
-const ObjectID = require('mongodb').ObjectID;
+const ObjectId = require('mongodb').ObjectId;
 const cors = require('cors');
 const bodyParser = require('body-parser');
 require('dotenv').config()
@@ -37,9 +37,8 @@ client.connect(err => {
     })
   })
 
-  app.delete('deleteEvent/:id', (req, res) => {
-    const id = ObjectID(req.params.id);
-    console.log('delete this', id);
+  app.delete('/deleteEvent/:id', (req, res) => {
+    const id = ObjectId(req.params.id);
     eventCollection.findOneAndDelete({_id: id})
     .then(documents => res.send(!!documents.value))
   })
